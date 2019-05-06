@@ -1,167 +1,196 @@
-
 $(document).ready(function () {
 
-
-    $("#remaining-time").hide();
-    $("#start").on('click', trivia.startGame);
-    $(document).on('click', '.option', trivia.guessChecker);
-
-})
-
-var trivia = {
-
-    correct: 0,
-    incorrect: 0,
-    unanswered: 0,
-    currentSet: 0,
-    timer: 20,
-    timerOn: false,
-    timerId: '',
-
-    questions: {
-        q1: 'Who was the first president?',
-        q2: 'Who is the current president?',
-        q3: 'Who was the 5th president?',
-        q4: 'Who was the 40th president?',
-        q5: "Who was the 15h President",
-    },
-    options: {
-        q1: ['George Washington', 'Abraham Lincoln', 'John Adams', 'Thomas Jefferson'],
-        q2: ['Obama', 'Bernie Sanders', 'Hillary', 'Donald Trump'],
-        q3: ['James Madison', 'James Monroe', 'James Buchanan', 'James Garfield'],
-        q4: ['Jimmy Carter', 'Bill Clinton', 'Ronald Reagan', 'George H Bush'],
-        q5: ['James Madison', 'James Monroe', 'James Buchanan', 'James Garfield'],
-    },
-    answers: {
-        q1: 'George Washington',
-        q2: 'Donald Trump',
-        q3: 'James Monroe',
-        q4: 'Ronald Reagan',
-        q5: 'James Buchanan',
-    },
-
-    startGame: function () {
-
-        trivia.currentSet = 0;
-        trivia.correct = 0;
-        trivia.incorrect = 0;
-        trivia.unanswered = 0;
-        clearInterval(trivia.timerId);
+    var correctAnswers = 0; 
+    var incorrectAnswers = 0; 
+    var noAnswer = 0; 
+    var userGuess = "";
+    var timer = 15; 
+    var questionIndex; 
+    holder = [];
+    newArray = [];
+    var intervalId;
+    var timerRunning = false;
 
 
-        $('#game').show();
 
-        $('#results').html('');
+    var questions = [
+            {
+                question: "Who was the first president?",
+                prompt: ["George Washington", "Abraham Lincoln", "John Adams", "Thomas Jefferson"],
+                answer: 0,
+            },
+            {
+               question: "Who is the current president?",
+                prompt: ["Obama", "Bernie Sanders", "Hillary", "Donald Trump"],
+                answer: 3,
+            },
+            {
+                question: "Who was the 5th president?",
+                prompt: ["James Madison", "James Monroe", "James Buchanan", "James Garfield"],
+                answer: 1,
+            },
+            {
+                question: "Who was the 40th president?",
+                prompt: ["Jimmy Carter", "Bill Clinton", "Ronald Reagan", "George H Bush"],
+                answer: 2,
+            },
+            {
+                question: "Who was the 15h President?",
+                prompt: ["James Madison", "James Monroe", "James Buchanan", "James Garfield"],
+                answer: 2,
+            },
+        ]
 
-        $('#timer').text(trivia.timer);
+    var count = questions.length;
 
-        $('#start').hide();
+    $("#reset").hide();
 
-        $('#remaining-time').show();
-
-        trivia.nextQuestion();
-
-    },
-    nextQuestion: function () {
-
-        trivia.timer = 10;
-        $('#timer').removeClass('last-seconds');
-        $('#timer').text(trivia.timer);
-
-        if (!trivia.timerOn) {
-            trivia.timerId = setInterval(trivia.timerRunning, 1000);
+    $(".start").on("click", function () {
+        displayQuestion();
+        startTimer();
+        for (var i = 0; i < questions.length; i++) {
+            holder.push(questions[i]);
         }
+    })
 
-        var questionContent = Object.values(trivia.questions)[trivia.currentSet];
-        $('#question').text(questionContent);
-
-        var questionOptions = Object.values(trivia.options)[trivia.currentSet];
-
-        $.each(questionOptions, function (index, key) {
-            $('#options').append($('<button class="option btn btn-info btn-lg">' + key + '</button>'));
-        })
-
-    },
-    timerRunning: function () {
-
-        if (trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length) {
-            $('#timer').text(trivia.timer);
-            trivia.timer--;
-            if (trivia.timer === 4) {
-                $('#timer').addClass('last-seconds');
-            }
+    function startTimer() {
+        if (!timerRunning) {
+            intervalId = setInterval(decrement, 1000);
+            timerRunning = true;
         }
-
-        else if (trivia.timer === -1) {
-            trivia.unanswered++;
-            trivia.result = false;
-            clearInterval(trivia.timerId);
-            resultId = setTimeout(trivia.guessResult, 1000);
-            $('#results').html('<h3>Out of time! The answer was ' + Object.values(trivia.answers)[trivia.currentSet] + '</h3>');
-        }
-
-        else if (trivia.currentSet === Object.keys(trivia.questions).length) {
-
-
-            $('#results')
-                .html('<h3>Thank you for playing!</h3>' +
-                    '<p>Correct: ' + trivia.correct + '</p>' +
-                    '<p>Incorrect: ' + trivia.incorrect + '</p>' +
-                    '<p>Unaswered: ' + trivia.unanswered + '</p>' +
-                    '<p>Please play again!</p>');
-
-
-            $('#game').hide();
-
-
-            $('#start').show();
-        }
-
-    },
-
-    guessChecker: function () {
-
-
-        var resultId;
-
-
-        var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
-
-
-        if ($(this).text() === currentAnswer) {
-
-            $(this).addClass('btn-success').removeClass('btn-info');
-
-            trivia.correct++;
-            clearInterval(trivia.timerId);
-            resultId = setTimeout(trivia.guessResult, 1000);
-            $('#results').html('<h3>Correct Answer!</h3>');
-        }
-
-        else {
-
-            $(this).addClass('btn-danger').removeClass('btn-info');
-
-            trivia.incorrect++;
-            clearInterval(trivia.timerId);
-            resultId = setTimeout(trivia.guessResult, 1000);
-            $('#results').html('<h3>Better luck next time! ' + currentAnswer + '</h3>');
-        }
-
-    },
-
-    guessResult: function () {
-
-
-        trivia.currentSet++;
-
-
-        $('.option').remove();
-        $('#results h3').remove();
-
-
-        trivia.nextQuestion();
 
     }
 
-}
+    function decrement() {
+        $("#timer").html("<h2> Time Remaining  " + timer + "</h2>");
+        timer--;
+
+
+        if (timer === 0) {
+            noAnswer++;
+            stop();
+            $("#answers").html("<p>Times Up! The correct answer is: " + options.prompt[options.answer] + "</p>");
+        }
+    }
+
+    function stop() {
+        timerRunning = false
+        clearInterval(intervalId);
+    }
+
+
+    function displayQuestion() {
+        //random question array
+        questionIndex = Math.floor(Math.random() * questions.length);
+        options = questions[questionIndex];
+
+        $("#questions").html("<h2>" + options.question + "</h2>");
+        for (var i = 0; i < options.prompt.length; i++) {
+            var userChoice = $("<div>");
+            userChoice.addClass("select");
+            userChoice.html(options.prompt[i]);
+            userChoice.attr("data-guessvalue", i);
+            $("#answers").append(userChoice);
+        }
+
+        $(".select").on("click", function () {
+
+            userGuess = parseInt($(this).attr("data-guessvalue"));
+
+            if (userGuess === options.answer) {
+                stop()
+                correctAnswers++;
+                userGuess = "";
+                $("#answers").html("<p>CORRECT!</p>");
+            }
+
+            else {
+
+                stop()
+                incorrectAnswers++;
+                userGuess = "";
+                $("#answers").html("<p>WRONG! The correct answer is: " + options.prompt[options.answer] + "</p>");
+            }
+
+        })
+    }
+
+    // function hidepicture() {
+    //     newArray.push(options);
+    //     gameQuestions.splice(questionIndex, 1);
+    //     var hidpic = setTimeout(function () {
+
+    //         $("#answers").empty();
+    //         timer = 15;
+
+            if ((incorrectAnswers + correctAnswers + noAnswer) === count) {
+
+                $("#questions").empty();
+                $("#questions").html("<h3> GAME OVER! See How You Did, below!</h3>");
+                $("#answers").append("<h4> Correct: " + correctAnswers + "</h4>");
+                $("#answers").append("<h4> Incorrect " + incorrectAnswers + "</h4>");
+                $("#answers").append("<h4> Unanswered: " + noAnswer + "</h4>");
+                $("#reset").show();
+                $("#timer").hide()
+                correctAnswers = 0;
+                incorrectAnswers = 0;
+                noAnswer = 0;
+            }
+
+            else {
+
+                startTimer()
+                displayQuestion()
+            }
+        }, 3000);
+    // }
+
+
+    $("#reset").on("click", function () {
+        $("#reset").hide();
+        $("#answers").empty();
+        $("#questions").empty();
+        for (var i = 0; i < holder.length; i++) {
+            questions.push(holder[i]);
+        }
+        startTimer();
+        displayQuestion();
+
+    });
+// });
+    
+// using alerts to ask questions
+// var questions = [
+//     {
+//         prompt: "Who was the first president?\n(A) George Washington\n\(B) Abraham Lincoln\n(C) John Adams\n(D) Thomas Jefferson",
+//         answer: "A"
+//     },
+//     {
+//         prompt: "Who is the current president?\n(A) Obama\n\(B) Bernie Sanders\n(C) Hillary\n(D) Donald Trump",
+//         answer: "D"
+//     },
+//     {
+//         prompt: "Who was the 5th president?\n(A) James Madison\n\(B) James Monroe\n(C) James Buchanan\n(D) James Garfield",
+//         answer: "B"
+//     },
+//     {
+//         prompt: "Who was the 40th president?\n(A) Jimmy Carter\n\(B) Bill Clinton\n(C) Ronald Reagan\n(D) George H Bush",
+//         answer: "C"
+//     },
+//     {
+//         prompt: "Who was the 15h President?\n(A) James Madison\n\(B) James Monroe\n(C) James Buchanan\n(D) James Garfield",
+//         answer: "C"
+//     },
+// ]
+// var score = 0;
+
+// for (var i = 0; i < questions.length; i++) {
+//     var response = window.prompt(questions[i].prompt)
+//     if (response === questions[i].answer) {
+//         score++;
+//         alert("Correct!");
+//     } else {
+//         alert("Wrong!");
+//     }
+// }
+// alert("you got " + score + "/" + questions.length);

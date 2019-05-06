@@ -20,13 +20,12 @@
 
     <div class="container">
         <div class="header text-center clearfix">
-            <h1 class="text-muted">President trivia game</h1>
+            <h1 class=>President trivia game</h1>
         </div>
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron">
             <div class="container">
                 <div id="game">
                     <h2>President Trivia Game</h2>
-                    <p id="remaining-time" class="lead">Remaining Time: <span id="timer"></span></p>
                     <p id="question" class="lead"></p>
                 </div>
                 <div id="results">
@@ -44,7 +43,11 @@
             </div>
 
         </div>
-
+        <div class="QandA">
+            <div id="timer"></div>
+            <div id="questions"></div>
+            <div id="answers"> </div>
+            <button id="reset">PLAY AGAIN!</button>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

@@ -1,0 +1,23 @@
+/* USA theme */
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url("../images/usa.jpg");
+};  
+
+.container {
+    /* width: 100%;
+    max-width: 960px; */
+    margin: 0 auto;
+    clear: both;
+
+} 
+
+.jumbotron{
+    background-color:#b11414;
+    text-align: center;
+    color: white;
+  };
+
+p, h1, h2, .timer, .questions, .QandA {
+    color: yellow;
+    font-weight: bolder;
+};
