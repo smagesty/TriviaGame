@@ -41,6 +41,46 @@ $(document).ready(function () {
             },
         ]
 
+
+// });
+    
+// using alerts to ask questions
+// var questions = [
+//     {
+//         prompt: "Who was the first president?\n(A) George Washington\n\(B) Abraham Lincoln\n(C) John Adams\n(D) Thomas Jefferson",
+//         answer: "A"
+//     },
+//     {
+//         prompt: "Who is the current president?\n(A) Obama\n\(B) Bernie Sanders\n(C) Hillary\n(D) Donald Trump",
+//         answer: "D"
+//     },
+//     {
+//         prompt: "Who was the 5th president?\n(A) James Madison\n\(B) James Monroe\n(C) James Buchanan\n(D) James Garfield",
+//         answer: "B"
+//     },
+//     {
+//         prompt: "Who was the 40th president?\n(A) Jimmy Carter\n\(B) Bill Clinton\n(C) Ronald Reagan\n(D) George H Bush",
+//         answer: "C"
+//     },
+//     {
+//         prompt: "Who was the 15h President?\n(A) James Madison\n\(B) James Monroe\n(C) James Buchanan\n(D) James Garfield",
+//         answer: "C"
+//     },
+// ]
+// var score = 0;
+
+// for (var i = 0; i < questions.length; i++) {
+//     var response = window.prompt(questions[i].prompt)
+//     if (response === questions[i].answer) {
+//         score++;
+//         alert("Correct!");
+//     } else {
+//         alert("Wrong!");
+//     }
+// }
+// alert("you got " + score + "/" + questions.length);
+
+
     var count = questions.length;
 
     $("#reset").hide();
@@ -109,7 +149,6 @@ $(document).ready(function () {
                 stop()
                 incorrectAnswers++;
                 userGuess = "";
-                $("#answers").html("<p>WRONG! The correct answer is: " + options.prompt[options.answer] + "</p>");
             }
 
         })
@@ -157,40 +196,3 @@ $(document).ready(function () {
         displayQuestion();
 
     });
-// });
-    
-// using alerts to ask questions
-// var questions = [
-//     {
-//         prompt: "Who was the first president?\n(A) George Washington\n\(B) Abraham Lincoln\n(C) John Adams\n(D) Thomas Jefferson",
-//         answer: "A"
-//     },
-//     {
-//         prompt: "Who is the current president?\n(A) Obama\n\(B) Bernie Sanders\n(C) Hillary\n(D) Donald Trump",
-//         answer: "D"
-//     },
-//     {
-//         prompt: "Who was the 5th president?\n(A) James Madison\n\(B) James Monroe\n(C) James Buchanan\n(D) James Garfield",
-//         answer: "B"
-//     },
-//     {
-//         prompt: "Who was the 40th president?\n(A) Jimmy Carter\n\(B) Bill Clinton\n(C) Ronald Reagan\n(D) George H Bush",
-//         answer: "C"
-//     },
-//     {
-//         prompt: "Who was the 15h President?\n(A) James Madison\n\(B) James Monroe\n(C) James Buchanan\n(D) James Garfield",
-//         answer: "C"
-//     },
-// ]
-// var score = 0;
-
-// for (var i = 0; i < questions.length; i++) {
-//     var response = window.prompt(questions[i].prompt)
-//     if (response === questions[i].answer) {
-//         score++;
-//         alert("Correct!");
-//     } else {
-//         alert("Wrong!");
-//     }
-// }
-// alert("you got " + score + "/" + questions.length);
