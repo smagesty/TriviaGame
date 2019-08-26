@@ -1,23 +1,124 @@
 /* USA theme */
-body {
+/* body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url("../images/usa.jpg");
-};  
+    background-repeat:  repeat;
+    background-color: blue;
+};   */
+/*
+p, h1, h2, .timer, .questions, .QandA {
+    color: red;
+    font-weight: bolder;
+};
+
 
 .container {
-    /* width: 100%;
-    max-width: 960px; */
+    width: 100%;
+    max-width: 960px;
     margin: 0 auto;
     clear: both;
 
-} 
+} */
 
-.jumbotron{
-    background-color:#b11414;
+/* .jumbotron{ */
+    /* background-color: red; */
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url("../images/usa.jpg");
+    background-repeat:  repeat;
     text-align: center;
     color: white;
-  };
+  }; */
 
-p, h1, h2, .timer, .questions, .QandA {
+/* p, h1, h2, .timer, .questions, .QandA {
     color: yellow;
     font-weight: bolder;
-};
+}; */ 
+
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 34px;
+    color: #0f0f0f;
+    /* background-color:rgb(15, 16, 66); */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url("../images/usa.jpg");
+    background-repeat:  repeat;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  .jumbotron{
+      padding: 2rem 2rem;
+      /* background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url("../images/usa.jpg");
+      background-repeat:  repeat; */
+      text-align: center;
+      color: white;
+      background-color: black;
+
+  }
+  h1{
+      color: white;
+      font-family: 'Pacifico', cursive;
+      text-align: center;
+  }
+  .container {
+    width: 100%;
+    /* max-width: 960px; */
+    margin: 0 auto;
+    clear: both;
+  }
+  .select {
+    border: 1px solid black;
+    border-radius: 5%;
+    width: 100%;
+    color: black;
+    text-align: center;
+    margin: 10px auto;
+    font-size: 20px;
+    background-color: white;
+
+}
+#imgages {
+    display: block;
+    width: 50%;
+    height: 50%;
+    border: 1px solid black;
+    padding: 100px;
+    
+}
+.col{
+    padding-left: 0;
+    padding-right: 0;
+}
+.col-5{
+    padding-left: 0;
+    padding-right: 0;
+}
+#headerimg{
+    /* float: left; */
+    width: 100%;
+    /* border: 1px solid black; */
+}
+#sideimg{
+    /* float: left; */
+    width: 550px;
+    height: 450px;
+    /* border: 1px solid black; */
+ 
+}
+#directions{
+    background-color: red;
+    color: black;
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bolder;
+
+}
+
+.QandA{
+    background-color: red; 
+    color: black;
+    font-family: 'Kaushan Script', cursive; 
+    text-align: center;
+    font-size: 30px;
+    font-weight: bolder;
+}
